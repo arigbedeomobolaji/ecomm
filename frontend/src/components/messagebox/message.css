@@ -1,0 +1,26 @@
+.alert {
+ font-size: 1.8rem;
+ border: 1px solid #404040;
+ border-radius: 0.5rem;
+ padding: 1rem 0;
+ background: #f7f7f7;
+ width: 50%;
+ margin: 1rem auto;
+ text-align: center;
+ font-weight: bold;
+
+}
+
+.alert--success {
+ border-color: #82b882;
+ background: #a3d1a3;
+ color: #40a040;
+ padding: 2rem;
+}
+
+.alert--danger {
+ border-color: #aa7373; 
+ background: #c99d9d;
+ color: #a04040;
+ padding: 2rem;
+}

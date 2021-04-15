@@ -1,0 +1,44 @@
+.cards {
+ display: flex;
+ flex-wrap: wrap;
+ justify-content: space-around;
+}
+
+.card{
+ border: 1px solid #f0c040;
+ border-radius: 0.5rem;
+ margin: 0.5rem;
+ width: 29rem;
+}
+
+.card__img{
+ border-radius: 1rem;
+ max-width: 29rem;
+ width: 100%;
+}
+
+.card__body {
+ padding: 1.5rem;
+}
+
+.card__title {
+ font-size: 1.8rem;
+ color: #000;
+}
+
+.card__title:hover {
+ color: #f0c040;
+}
+
+.card__price {
+ font-size: 1.7rem;
+}
+
+@media (max-width: 600px) {
+ .cards{
+  justify-content: center;
+ }
+ .card {
+  width: 30rem;
+ }
+}

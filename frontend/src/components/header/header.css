@@ -1,0 +1,22 @@
+.header {
+ display: flex;
+ justify-content: space-between;
+ align-items: center;
+ padding: 1rem 1.5rem;
+ background: #203040;
+ color: #fff;
+}
+
+.header__brand {
+ color: #f0c040;
+ font-size: 2rem;
+}
+
+.header__link {
+ color: #fff;
+ padding: 1.5rem;
+}
+
+.header__link:hover{
+ color: #f0c040;
+}
