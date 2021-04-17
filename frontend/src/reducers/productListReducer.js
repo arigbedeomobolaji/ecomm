@@ -1,8 +1,8 @@
 // jshint ignore:start
-import { PRODUCT_LIST_FAIL, PRODUCT_LIST_REQUEST, PRODUCT_LIST_SUCCESS } from "../constants/productLists";
+import { PRODUCT_DETAIL_FAIL, PRODUCT_DETAIL_REQUEST, PRODUCT_DETAIL_SUCCESS, PRODUCT_LIST_FAIL, PRODUCT_LIST_REQUEST, PRODUCT_LIST_SUCCESS } from "../constants/productConstant";
 
 const productListDefault = {products: [], loading: true, error: false}
-const productListReducer =  ( state = productListDefault, action ) => {
+export const productListReducer =  ( state = productListDefault, action ) => {
  switch(action.type) {
   case PRODUCT_LIST_REQUEST:
    return { loading: true }
@@ -15,4 +15,16 @@ const productListReducer =  ( state = productListDefault, action ) => {
  }
 }
 
-export default productListReducer
+const productDetailDefault = {product: {}, error: false, loading: true}
+export const productDetailReducer = (state = productDetailDefault, action) => {
+  switch (action.type) {
+    case PRODUCT_DETAIL_REQUEST:
+      return { loading: true, productId: action.payload }
+    case PRODUCT_DETAIL_SUCCESS:
+      return { loading: false, product: action.payload }
+    case PRODUCT_DETAIL_FAIL:
+      return { loading: false, error: action.payload}
+    default:
+      return state
+  }
+}

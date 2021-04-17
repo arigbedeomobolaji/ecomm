@@ -1,11 +1,11 @@
 // jshint ignore: start
-import React, {useState, useEffect} from "react"
+import React, { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import "./home.css"
-import Product from "../product/Product"
-import LoadingBox from "../loadingbox/LoadingBox"
-import MessageBox from "../messagebox/MessageBox"
+import Product from "../../components/product/Product"
 import {productListAction} from "../../actions/productListAction"
+import LoadingBox from "../../components/loadingbox/LoadingBox"
+import MessageBox from "../../components/messagebox/MessageBox"
 
 const Home = () => {
   const dispatch = useDispatch()
@@ -13,7 +13,7 @@ const Home = () => {
   const {loading, products, error} = listProduct
   useEffect(() => {
     dispatch(productListAction())
-  }, [])
+  }, [dispatch])
 
   return (
     <div>

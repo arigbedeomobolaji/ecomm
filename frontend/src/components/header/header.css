@@ -2,7 +2,8 @@
  display: flex;
  justify-content: space-between;
  align-items: center;
- padding: 1rem 1.5rem;
+ height: 5rem;
+ padding: 0 1.5rem;
  background: #203040;
  color: #fff;
 }
@@ -14,9 +15,36 @@
 
 .header__link {
  color: #fff;
- padding: 1.5rem;
+ padding: 0 2.5rem;
+ height: 100%;
 }
 
 .header__link:hover{
  color: #f0c040;
+}
+
+.header__link--cart{
+ position: relative;
+ display: inline-block;
+ height: 100%;
+}
+
+.badge{
+ position: absolute;
+ top: 1.8rem;
+ left: 5rem;
+ background: rgba(255,255,255,0.93);
+ color: #f0c040;
+ padding: 0 0.5rem;
+ font-weight: bold;
+ border-radius: 50%;
+}
+
+
+.cart-icon{
+ color: #f0c040;
+}
+
+.cart-icon:hover{
+ opacity: 0.9;
 }

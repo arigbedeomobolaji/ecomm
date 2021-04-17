@@ -1,10 +1,11 @@
 // jshint ignore:start
 import React from "react"
 import {BrowserRouter, Switch, Route} from "react-router-dom"
+import Home from "../views/home/Home"
+import Products from "../views/products/Products"
 import Header from "../components/header/Header"
-import Home from "../components/home/Home"
-import Products from "../components/products/Products"
 import Footer from "../components/footer/Footer"
+import Cart from "../views/cart/Cart"
 
 const AppRoute = () => {
  return (
@@ -14,6 +15,7 @@ const AppRoute = () => {
     <Switch>
      <Route path="/" component={Home} exact></Route>
      <Route path="/products/:id" component={Products}></Route>
+     <Route path="/cart/:id?" component={Cart} />
     </Switch>
     <Footer />
    </div>
