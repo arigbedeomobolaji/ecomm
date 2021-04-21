@@ -26,6 +26,10 @@
  margin: 0 0.5rem;
 }
 
+.product__description {
+  padding-left: 3rem;
+}
+
 .product__description > * {
  padding-bottom: 1rem;
 }
@@ -41,7 +45,7 @@
  border-radius: 0.5rem;
  background: #f7f7f7;
  width: 95%;
- margin: 3rem 2rem 2rem;
+ margin: 1.5rem 2rem 3rem;
 }
 
 .product__checkout__flex {

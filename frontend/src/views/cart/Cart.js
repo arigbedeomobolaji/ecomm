@@ -21,7 +21,7 @@ const Cart = (props) => {
   }
  }, [dispatch, productId, qty])
  const handleProceedToCheckout = () => {
-  props.history.push("/sigin?redirect=shipping")
+  props.history.push("/signin?redirect=shipping")
  }
  return (
   <div className="cards">
@@ -30,15 +30,13 @@ const Cart = (props) => {
     { cartItems.length === 0 ?
      (
       <MessageBox>
-       <Link to="/">Let's go Shopping</Link>
+       <Link to="/">No Item in the cart. Let's go Shopping</Link>
       </MessageBox>
      ) :
      (
       cartItems.map(cartItem => <CartItem key={cartItem.product} {...cartItem} />) )
     }
    </div>
-   {
-    cartItems.length > 0 && (
      <div className="cart__checkout">
     <div className="checkout__subtotal">
     Subtotal ({cartItems.reduce((acc, current) => acc + current.qty, 0)} items) : &nbsp;
@@ -51,8 +49,6 @@ const Cart = (props) => {
      disabled={cartItems.length === 0}
     >Proceed to Checkout</button>
    </div>
-    )
-   }
    
   </div>
  )

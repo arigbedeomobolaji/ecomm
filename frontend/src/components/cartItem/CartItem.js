@@ -1,7 +1,7 @@
 import React from "react"
 import { useDispatch } from "react-redux"
 import {Link} from "react-router-dom"
-import { addToCartAction } from "../../actions/cartActions"
+import { addToCartAction, removeFromCartAction } from "../../actions/cartActions"
 import "./cartitem.css"
 
 const CartItem = (props) => {
@@ -10,7 +10,7 @@ const dispatch = useDispatch()
  // const { CartItems } = cart
  
  const handleRemoveFromCart = (id) => {
-
+  dispatch(removeFromCartAction(id))
  }
  return (
   <div className="cards m-l">
@@ -31,7 +31,7 @@ const dispatch = useDispatch()
    <div className="card__price">
     ${props.price}
    </div>
-   <button className="button button--primary" type="button" onClick={handleRemoveFromCart}>Delete</button>
+   <button className="button button--primary" type="button" onClick={() => handleRemoveFromCart(props.product)}>Delete</button>
   </div>
  )
 }

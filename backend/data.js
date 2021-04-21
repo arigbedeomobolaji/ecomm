@@ -1,8 +1,28 @@
 // jshint ignore:start
+import bcrypt from "bcryptjs"
+
 const data = {
+ users: [
+  {
+   name: "Arigbede Omobolaji",
+   email: "arigbedeomobolaji@gmail.com",
+   password: bcrypt.hashSync("12345", 8),
+   isAdmin: true
+  },
+  {
+   name: "Awogboro Ojo",
+   email: "awogboroojo@gmail.com",
+   password: bcrypt.hashSync("12345", 8),
+   isAdmin: false
+  },
+  {
+   name: "Arigbede Olayinka",
+   email: "arigbedeolayinka@gmail.com",
+   password: bcrypt.hashSync("12345678", 8)
+  }
+ ],
  products: [
   {
-   _id: "1",
    name: "Nike Pants & Shirt",
    category: "shirt",
    image: "/images/p1.jpg",
@@ -13,7 +33,6 @@ const data = {
    description: "High quality material",
    countInStock: 10
   },{
-   _id: "2",
    name: "Adidas Shirt",
    category: "shirt",
    image: "/images/p2.jpg",
@@ -24,7 +43,6 @@ const data = {
    description: "High quality material",
    countInStock: 12
   },{
-   _id: "3",
    name: "Puma Shirt",
    category: "shirt",
    image: "/images/p3.jpg",
@@ -35,7 +53,6 @@ const data = {
    description: "High quality material",
    countInStock: 0
   },{
-   _id: "4",
    name: "Nike Pant",
    category: "pants",
    image: "/images/p4.jpg",
@@ -46,18 +63,16 @@ const data = {
    description: "High quality material",
    countInStock: 14
   },{
-   _id: "5",
    name: "Adidas Pants",
-   category: "pants",
    image: "/images/p5.jpg",
-   price: 120,
+   category: "pants",
    brand: "Adidas",
+   description: "High quality material",
+   price: 120,
    rating: 3.0,
    numReviews: 10,
-   description: "High quality material",
    countInStock: 0
   },{
-   _id: "6",
    name: "Puma Pants",
    category: "pants",
    image: "/images/p6.jpg",

@@ -1,0 +1,30 @@
+.form {
+ max-width: 50rem;
+ margin: 0 auto;
+}
+
+.form__group{
+ display: flex;
+ flex-direction: column;
+ margin: 1rem 0;
+}
+
+.form__label,
+.form__input {
+ display: block;
+ padding: 1rem 0.5rem;
+}
+
+.form__label{
+ font-weight: 600;
+}
+
+.form__input {
+ border: 1px solid #ccc;
+}
+
+@media (max-width: 40rem){
+ .form {
+  margin: 0 1rem;
+ }
+}

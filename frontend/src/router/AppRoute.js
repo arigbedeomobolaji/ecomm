@@ -6,6 +6,7 @@ import Products from "../views/products/Products"
 import Header from "../components/header/Header"
 import Footer from "../components/footer/Footer"
 import Cart from "../views/cart/Cart"
+import Signin from "../views/signin/Signin"
 
 const AppRoute = () => {
  return (
@@ -16,6 +17,7 @@ const AppRoute = () => {
      <Route path="/" component={Home} exact></Route>
      <Route path="/products/:id" component={Products}></Route>
      <Route path="/cart/:id?" component={Cart} />
+     <Route path="/signin" component={Signin} />
     </Switch>
     <Footer />
    </div>

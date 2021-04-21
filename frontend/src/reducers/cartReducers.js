@@ -1,5 +1,5 @@
 // jshint ignore:start
-import { CART_ADD_ITEM } from "../constants/cartConstants"
+import { CART_ADD_ITEM, CART_REMOVE_ITEM } from "../constants/cartConstants"
 
 const cartDefault = {
  cartItems: []
@@ -24,7 +24,11 @@ export const addToCartReducer = (state = cartDefault, action) => {
      ]
     }
    }
-
+   case CART_REMOVE_ITEM:
+     return {
+       ...state,
+       cartItems: state.cartItems.filter((cartItem) => cartItem.product !== action.payload)
+     }
   default:
    return state
  }

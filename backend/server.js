@@ -1,21 +1,36 @@
 import express from "express"
-import data from "./data.js"
+import mongoose from "mongoose"
+import dotenv from "dotenv"
+import userRouter from "./router/userRouter.js"
+import productRouter from "./router/productRouter.js"
+
+// configure the environment variables
+dotenv.config()
 
 const app = express()
 const port = process.env.PORT || 5000
+const dbURL = process.env.DB_URL || `mongodb://127.0.0.1:27017/ecomm`
 
-app.get("/api/products/:id", (req, res) => {
- const id = req.params.id
- const product = data.products.find((product) => product._id === id)
- if (product) {
-  res.send(product)
- } else {
-  res.status(404).send({message: "product not found"})
- }
+// app setting middlewares
+app.use(express.json())
+app.use(express.urlencoded({extended: true}))
+
+// database connnection
+mongoose.connect(dbURL, {
+ useNewUrlParser: true,
+ useUnifiedTopology: true,
+ useCreateIndex: true,
+ useFindAndModify: false
 })
 
-app.get("/api/products", (req, res) => {
- res.send(data.products)
+
+// web app backend router handlers
+app.use("/api/products", productRouter)
+app.use("/api/users", userRouter)
+
+// error handling middleware
+app.use((err, req, res, next) => {
+ res.status(500).send({message: err.message})
 })
 
 app.get("/", (req, res) => {
