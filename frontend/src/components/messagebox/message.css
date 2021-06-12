@@ -6,7 +6,7 @@
  background: #f7f7f7;
  width: 90%;
  margin: 1rem auto;
- font-weight: bold;
+ font-weight: 600;
 
 }
 
@@ -20,4 +20,11 @@
  border-color: #aa7373; 
  background: #e7d7d7;
  color: #a04040;
+}
+
+@media (max-width: 500px) {
+ .alert {
+  font-size: 1.2rem;
+  font-weight: 400;
+ }
 }

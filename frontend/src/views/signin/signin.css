@@ -8,10 +8,14 @@
  flex-direction: column;
  margin: 1rem 0;
 }
+.form__group.radio {
+ flex-direction: row;
+ align-items: center;
+}
 
 .form__label,
 .form__input {
- display: block;
+ display: inline-block;
  padding: 1rem 0.5rem;
 }
 

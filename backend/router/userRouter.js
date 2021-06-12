@@ -16,7 +16,6 @@ userRouter.get("/seed", asyncHandler(async (req, res) => {
 userRouter.post("/signin", asyncHandler(async (req, res) => {
  const user = await User.findOne({email: req.body.email})
  if (user) {
-  console.log(generateAuthToken(user))
   if (await bcrypt.compare(req.body.password, user.password)) {
    return res.send({
     _id: user._id,
@@ -27,8 +26,33 @@ userRouter.post("/signin", asyncHandler(async (req, res) => {
    })
   }
  }
-
  res.status(401).send({message: "invalid username or password"})
 }))
+
+ userRouter.post("/register", asyncHandler(async (req, res) => {
+  const {name, email, password } = req.body
+  const user = new User({
+   name,
+   email,
+   password: bcrypt.hashSync(password, 8)
+  })
+  try {
+   const createdUser = await user.save()
+   if(createdUser) {
+    return res.send({
+     _id: createdUser._id,
+     name: createdUser.name,
+     email: createdUser.email,
+     isAdmin: createdUser.isAdmin,
+     token: generateAuthToken(createdUser)
+    })
+   }
+  } catch (error) {
+   res.status(401).send({message: "Email Already exist!!!"})
+  }
+
+
+ }))
+
 
 export default userRouter;

@@ -3,6 +3,7 @@ import mongoose from "mongoose"
 import dotenv from "dotenv"
 import userRouter from "./router/userRouter.js"
 import productRouter from "./router/productRouter.js"
+import orderRouter from "./router/orderRouter.js"
 
 // configure the environment variables
 dotenv.config()
@@ -27,6 +28,7 @@ mongoose.connect(dbURL, {
 // web app backend router handlers
 app.use("/api/products", productRouter)
 app.use("/api/users", userRouter)
+app.use("/api/orders", orderRouter)
 
 // error handling middleware
 app.use((err, req, res, next) => {

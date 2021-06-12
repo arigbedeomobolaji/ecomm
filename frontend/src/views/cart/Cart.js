@@ -36,6 +36,7 @@ const Cart = (props) => {
      (
       cartItems.map(cartItem => <CartItem key={cartItem.product} {...cartItem} />) )
     }
+    
    </div>
      <div className="cart__checkout">
     <div className="checkout__subtotal">

@@ -1,13 +1,16 @@
 import React, {useEffect, useState} from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { Link } from "react-router-dom"
-import { userSigninAction } from "../../actions/userSigninAction"
+import { userRegisterAction } from "../../actions/userSigninAction"
 import MessageBox from "../../components/messagebox/MessageBox"
-import "./signin.css"
+import "../signin/signin.css"
 
-const Signin = (props) => {
+const Register = (props) => {
+  const [name, setName] = useState("")
  const [email, setEmail] = useState("")
+ const [confirmPassword, setConfirmPassword] = useState("")
  const [password, setPassword] = useState("")
+ const [clientError, setClientError] = useState("")
  const userSignin = useSelector((state => state.userSignin))
  const {userInfo, loading, error} = userSignin
 
@@ -16,8 +19,11 @@ const Signin = (props) => {
 
  const dispatch = useDispatch()
  const submitHandler = (e) => {
-  e.preventDefault()
-   dispatch(userSigninAction(email, password))
+   e.preventDefault()
+   if(password !== confirmPassword){
+     return setClientError("Password & confirm password didn't match")
+   }
+   dispatch(userRegisterAction(name, email, password))
  }
 
  useEffect(() => {
@@ -29,15 +35,30 @@ const Signin = (props) => {
  return (
   <form className="form" onSubmit={submitHandler}>
    <div className="form__group">
-    <h1>Sign in</h1>
+    <h1>Register</h1>
    </div>
    {
-     !!error &&( 
+     !!clientError ? (
+      <div className="form__group">
+         <MessageBox variant={"danger"}> {clientError} </MessageBox>
+       </div>
+     ) :!!error &&( 
        <div className="form__group">
          <MessageBox variant={"danger"}> {error} </MessageBox>
        </div>
     )
      }
+    <div className="form__group">
+    <label className="form__label" htmlFor="name">Name</label>
+    <input
+     type="text"
+     id="name"
+     className="form__input"
+     placeholder="Enter Email Address"
+     required
+     value={name}
+     onChange={e => setName(e.target.value)}></input>
+   </div>
    <div className="form__group">
     <label className="form__label" htmlFor="email">Email</label>
     <input
@@ -46,6 +67,7 @@ const Signin = (props) => {
      className="form__input"
      placeholder="Enter Email Address"
      required
+     value={email}
      onChange={e => setEmail(e.target.value)}></input>
    </div>
    <div className="form__group">
@@ -56,23 +78,35 @@ const Signin = (props) => {
      className="form__input"
      placeholder="Enter password Address"
      required
+     value={password}
      onChange={e => setPassword(e.target.value)}></input>
+   </div>
+   <div className="form__group">
+    <label className="form__label" htmlFor="confirm-password">Confirm Password</label>
+    <input
+     type="password"
+     id="confirm-password"
+     className="form__input"
+     placeholder="Enter confirm password Address"
+     required
+     value={confirmPassword}
+     onChange={e => setConfirmPassword(e.target.value)}></input>
    </div>
    <div className="form__group">
     <label className="form__label" />
     <button className="button button--primary" type="submit" disabled={loading}>
     {
-      loading ? <span>Loading...</span> : <span>Sign in</span>
+      loading ? <span>Loading...</span> : <span>Register</span>
     }
     </button>
    </div>
    <div className="form__group">
     <span>
-    New customer? {" "} <Link to={`/register?redirect=${redirect}`}>Register Here</Link>
+    New customer? {" "} <Link to={`/signin?redirect=${redirect}`}>Sign in</Link>
     </span>
    </div>
   </form>
  )
 }
 
-export default Signin
+export default Register

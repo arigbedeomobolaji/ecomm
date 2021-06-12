@@ -25,7 +25,9 @@ const Header = (props) => {
     <div>
     <Link to="/cart" className="header__link header__link--cart">
     <i className="fas fa-cart-arrow-down fa-2x cart-icon"></i>
-         <span className="badge"> { cartItems.length > 0 && cartItems.length }</span>
+    {
+      cartItems.length > 0 && <span className="badge"> { cartItems.length > 0 && cartItems.length }</span>
+    }
     </Link>
     </div>
    

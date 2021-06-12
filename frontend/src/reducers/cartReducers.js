@@ -1,8 +1,9 @@
 // jshint ignore:start
-import { CART_ADD_ITEM, CART_REMOVE_ITEM } from "../constants/cartConstants"
+import { CART_ADD_ITEM, CART_REMOVE_ITEM, CART_SAVE_PAYMENT_METHOD, SHIPPING_ADDRESS } from "../constants/cartConstants"
 
 const cartDefault = {
- cartItems: []
+ cartItems: [],
+ shippingAddress: null
 }
 export const addToCartReducer = (state = cartDefault, action) => {
  switch (action.type) {
@@ -28,6 +29,16 @@ export const addToCartReducer = (state = cartDefault, action) => {
      return {
        ...state,
        cartItems: state.cartItems.filter((cartItem) => cartItem.product !== action.payload)
+     }
+   case SHIPPING_ADDRESS:
+     return {
+       ...state,
+      shippingAddress: action.payload
+     }
+   case CART_SAVE_PAYMENT_METHOD:
+     return {
+       ...state,
+       cartPaymentMethod: action.payload
      }
   default:
    return state
