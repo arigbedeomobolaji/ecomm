@@ -7,7 +7,7 @@ const orderRouter = express.Router()
 
 // Create post route for new orders
 orderRouter.post(
-  "/",
+  "/create",
   verifyAuthToken,
   expressAsyncHandler(async(req, res) => {
   const {
@@ -16,9 +16,11 @@ orderRouter.post(
     paymentMethod, 
     itemsPrice, 
     shippingPrice, 
-    taxPrice
+    taxPrice,
+    totalPrice
   } = req.body
-  if(!orderItems){
+  console.log(req.body)
+  if(orderItems.length === 0){
    return res.status(400).send({error: "orderItems cannot be empty"})
   }else{
     const newOrder = new Order({
@@ -28,13 +30,13 @@ orderRouter.post(
       itemsPrice,
       shippingPrice,
       taxPrice,
+      totalPrice,
       user: req.user._id
     })
-
     const createdOrder = await newOrder.save()
-
-    if(!createdOrder){
-      return res.status(500).send()
+    console.log(createdOrder)
+    if(!createdOrder._id){
+      return res.status(500).send("There is an error saving newOrder")
     }else{
       res.status(201).send({"message": "New order succesfully saved.", createdOrder})
     }

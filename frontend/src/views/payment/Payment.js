@@ -16,7 +16,6 @@ const Payment = (props) => {
 
  const submitHandler = (e) => {
   e.preventDefault()
-  console.log(paymentMethod)
   dispatch(saveCartPaymentMethod(paymentMethod))
   props.history.push("/placeorder")
  }

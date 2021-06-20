@@ -1,5 +1,5 @@
 // jshint ignore:start
-import { CART_ADD_ITEM, CART_REMOVE_ITEM, CART_SAVE_PAYMENT_METHOD, SHIPPING_ADDRESS } from "../constants/cartConstants"
+import { CART_ADD_ITEM, CART_EMPTY, CART_REMOVE_ITEM, CART_SAVE_PAYMENT_METHOD, SHIPPING_ADDRESS } from "../constants/cartConstants"
 
 const cartDefault = {
  cartItems: [],
@@ -40,6 +40,11 @@ export const addToCartReducer = (state = cartDefault, action) => {
        ...state,
        cartPaymentMethod: action.payload
      }
+    case CART_EMPTY:
+      return {
+        ...state,
+        cartItems: []
+      }
   default:
    return state
  }

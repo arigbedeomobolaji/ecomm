@@ -20,11 +20,12 @@ export const verifyAuthToken = expressAsyncHandler(async(req, res, next) => {
   if(!authToken){
     return res.status(404).send({"error": "No auth token found."})
   }
-  try{
-    const decoded = await jwt.verify(authToken, porcess.env.JWT_SECRET)
-    req.user = decoded
-    next()
-  }catch(e){
-    return res.status(401).send({"error": "Invalid token"})
-  }
+  jwt.verify(authToken, process.env.JWT_SECRET, (error, decoded) => {
+    if(!error && decoded._id){
+      req.user = decoded
+      next()
+    }else{
+      return res.status(401).send({"error": "Invalid token"})
+    }
+  })
 })
