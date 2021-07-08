@@ -33,14 +33,13 @@ const PlaceOrder = (props) => {
         totalPrice: cart.orderTotal
         }))
     }
-
     useEffect(() => {
         if(success){
             const orderId = orderDetails._id
             props.history.push(`/orders/${orderId}`)
             dispatch({type: ORDER_CREATE_RESET})
         }
-    }, [success, props.history, orderDetails, dispatch])
+    }, [success, props.history, dispatch, orderDetails])
 
  return (
   <div>
@@ -84,19 +83,19 @@ const PlaceOrder = (props) => {
       <h3> Order Summary</h3>
       <div className="row force">
        <div>Items</div>
-       <div>${cart.itemsPrice.toFixed(2)}</div>
+       <div>₦ {cart.itemsPrice.toFixed(2)}</div>
       </div>
       <div className="row force">
        <div>Shipping</div>
-       <div>${toPrice(cart.shippingPrice).toFixed(2)}</div>
+       <div>₦ {toPrice(cart.shippingPrice).toFixed(2)}</div>
       </div>
       <div className="row force">
        <div>Tax</div>
-       <div>${cart.taxPrice.toFixed(2)}</div>
+       <div>₦ {cart.taxPrice.toFixed(2)}</div>
       </div>
       <div className="row force">
        <div><strong>Order Total</strong></div>
-       <div><strong>${cart.orderTotal.toFixed(2)}</strong></div>
+       <div><strong>₦ {cart.orderTotal.toFixed(2)}</strong></div>
       </div>
       <button
         type="button" 

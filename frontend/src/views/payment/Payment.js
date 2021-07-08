@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { saveCartPaymentMethod } from "../../actions/cartActions"
 
 const Payment = (props) => {
- const [paymentMethod, setPaymentMethod] = useState("PayPal")
+ const [paymentMethod, setPaymentMethod] = useState("paystack")
  const cart = useSelector(state => state.cart)
  const {shippingAddress} = cart
  const dispatch = useDispatch()
@@ -32,23 +32,23 @@ const Payment = (props) => {
      className="form__input"
      type="radio"
      name="payment"
-     id="paypal"
-     value="PayPal"
+     id="paystack"
+     value="paystack"
      checked
      onChange={e => setPaymentMethod(e.target.value)}
     ></input>
-    <label className="form__label" htmlFor="paypal">PayPal</label>
+    <label className="form__label" htmlFor="paypal">Paystack</label>
    </div>
    <div className="form__group radio">
     <input
      className="form__input"
      type="radio"
      name="payment"
-     id="stripe"
-     value="Stripe"
+     id="flutterwave"
+     value="flutterwave"
      onChange={e => setPaymentMethod(e.target.value)}
     ></input>
-    <label className="form__label" htmlFor="stripe">Stripe</label>
+    <label className="form__label" htmlFor="stripe">Flutterwave</label>
    </div>
    <div className="form__group">
     <label />

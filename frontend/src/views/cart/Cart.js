@@ -41,7 +41,7 @@ const Cart = (props) => {
      <div className="cart__checkout">
     <div className="checkout__subtotal">
     Subtotal ({cartItems.reduce((acc, current) => acc + current.qty, 0)} items) : &nbsp;
-    $ {cartItems.reduce((acc, current) => acc + current.price * current.qty, 0 )}
+    ₦ {cartItems.reduce((acc, current) => acc + current.price * current.qty, 0 )}
     </div>
     <button
      className="button button--block button--primary"

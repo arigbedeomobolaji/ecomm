@@ -11,6 +11,7 @@ import Register from "../views/register/Register"
 import Shipping from "../views/shipping/Shipping"
 import Payment from "../views/payment/Payment"
 import PlaceHolder from "../views/placeorder/PlaceOrder"
+import OrderScreen from "../views/orderscreen/orderScreen"
 
 const AppRoute = () => {
  return (
@@ -25,6 +26,7 @@ const AppRoute = () => {
      <Route path="/shipping" component={Shipping} />
      <Route path="/payment" component={Payment} />
      <Route path="/placeorder" component={PlaceHolder} />
+     <Route path="/orders/:id" component={OrderScreen} />
     </Switch>
     <Footer />
   </BrowserRouter>

@@ -2,18 +2,16 @@
 const data = {
  products: [
   {
-   _id: "1",
    name: "Nike Pants & Shirt",
    category: "shirt",
    image: "/images/p1.jpg",
-   price: 120,
+   price: 4000,
    brand: "Nike",
    rating: 4.5,
    numReviews: 10,
    description: "High quality material",
    countInStock: 10
   },{
-   _id: "2",
    name: "Adidas Shirt",
    category: "shirt",
    image: "/images/p2.jpg",
@@ -24,44 +22,40 @@ const data = {
    description: "High quality material",
    countInStock: 12
   },{
-   _id: "3",
    name: "Puma Shirt",
    category: "shirt",
    image: "/images/p3.jpg",
    price: 80,
    brand: "Puma",
    rating: 2.0,
-   numReviews: 1100,
+   numReviews: 5000,
    description: "High quality material",
    countInStock: 0
   },{
-   _id: "4",
    name: "Nike Pant",
    category: "pants",
    image: "/images/p4.jpg",
-   price: 200,
+   price: 3500,
    brand: "Nike",
    rating: 3.5,
    numReviews: 20,
    description: "High quality material",
    countInStock: 14
   },{
-   _id: "5",
    name: "Adidas Pants",
-   category: "pants",
    image: "/images/p5.jpg",
-   price: 120,
+   category: "pants",
    brand: "Adidas",
+   description: "High quality material",
+   price: 4500,
    rating: 3.0,
    numReviews: 10,
-   description: "High quality material",
    countInStock: 0
   },{
-   _id: "6",
    name: "Puma Pants",
    category: "pants",
    image: "/images/p6.jpg",
-   price: 45,
+   price: 2500,
    brand: "Puma",
    rating: 5.0,
    numReviews: 5,

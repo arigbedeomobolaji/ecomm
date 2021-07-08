@@ -39,13 +39,13 @@ const Products = (props) => {
           <div className="product__description">
           <h2 className="product-description__title">{product.name}</h2>
           <Rating rating={product.rating} numReviews={ product.numReviews } />
-          <p>Price: ${ product.price }</p>
+          <p>Price: ₦ { product.price }</p>
           <p>Description: {product.description} </p>
           </div>
           <div className="product__checkout">
           <div className="product__checkout__flex">
             <div>Price</div>
-            <div>${ product.price }</div>
+            <div>₦ { product.price }</div>
           </div>
           <div className="product__checkout__flex">
             <div>Status</div>

@@ -16,7 +16,7 @@ const Product = ({product}) => {
        <h2 className="card__title">{ product.name }</h2>
        </Link>
        <Rating rating={product.rating} numReviews={product.numReviews} />
-       <h2 className="card__price">${ product.price }</h2>
+       <h2 className="card__price">₦ &nbsp;{ product.price }</h2>
       </div>
      </div>
  )

@@ -29,7 +29,7 @@ const dispatch = useDispatch()
     </select>
    </div>
    <div className="card__price">
-    ${props.price}
+   ₦ {props.price}
    </div>
    <button className="button button--primary" type="button" onClick={() => handleRemoveFromCart(props.product)}>Delete</button>
   </div>

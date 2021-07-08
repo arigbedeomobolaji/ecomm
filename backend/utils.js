@@ -9,7 +9,7 @@ export const generateAuthToken = (user) => {
      _id: user._id },
    process.env.JWT_SECRET,
    {
-    expiresIn: "30d"
+    expiresIn: "1d"
    }
   )
    return token
