@@ -23,3 +23,15 @@
   2. create payOrder  in api.js
   3. create route for /:id/pay in orderRoute
   4. rerender after pay order
+32. Display Orders History
+  1. create customer orders api
+  2. create api for etMyOrders
+  3. Show order in profile screen
+  4. style orders
+33. Display User Profile
+  1. create user details api
+  2. show user information
+34. Update User Profile
+  1. Create user update API
+  2. update user Info
+
