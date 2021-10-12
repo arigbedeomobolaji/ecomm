@@ -17,7 +17,10 @@ const CreateProduct = (props) => {
 	const [numReviews, setNumReviews] = useState(0);
 	const [countInStock, setCountInStock] = useState(0);
 	const [description, setDescription] = useState('');
+	const [file, setFile] = useState(null);
 	const dispatch = useDispatch();
+
+	console.log(file);
 
 	// interacting with store
 	const createdProduct = useSelector((state) => state.createdProduct);
@@ -26,6 +29,7 @@ const CreateProduct = (props) => {
 	const canContinue =
 		name &&
 		price &&
+		file &&
 		brand &&
 		category &&
 		rating >= 0 &&
@@ -43,6 +47,7 @@ const CreateProduct = (props) => {
 			numReviews,
 			countInStock,
 			description,
+			file,
 		};
 		dispatch(createProductAction(data));
 		if (product) {
@@ -61,7 +66,9 @@ const CreateProduct = (props) => {
 				name={'name'}
 				label={'Name'}
 				placeholder={'Enter Product Name'}
-				onChange={(e) => setName(e.target.value)}
+				onChange={(e) => {
+					setName(e.target.value);
+				}}
 			/>
 			<InputText
 				isRequired={true}
@@ -70,6 +77,14 @@ const CreateProduct = (props) => {
 				label='Price'
 				placeholder='Enter Product Price'
 				onChange={(e) => setPrice(e.target.value)}
+			/>
+			<InputText
+				isRequired={true}
+				type='file'
+				name='image'
+				label='Product Image'
+				accept='image/*'
+				onChange={(e) => setFile(e.target.files[0])}
 			/>
 			<InputText
 				name='brand'
