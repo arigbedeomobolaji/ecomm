@@ -131,7 +131,8 @@ select,
 	color: #171717;
 	background: #f8f8f8;
 	font-weight: 600;
-	padding: 1rem 1.86rem;
+	padding: 1.5rem 1.86rem;
+	margin-bottom: 0.5rem;
 	text-align: center;
 }
 
@@ -155,7 +156,10 @@ select {
 }
 
 .button--small {
-	font-size: 1.2rem;
+	font-size: 1rem;
+	padding: 1rem;
+	font-weight: bold;
+	width: 80px;
 }
 
 .button:disabled {
@@ -230,15 +234,57 @@ select {
 	flex-direction: column;
 	margin: 1rem 0;
 }
+
+.form__group--row {
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+}
+
+.space-evenly {
+	justify-content: space-evenly;
+}
+
 .form__group.radio {
 	flex-direction: row;
 	align-items: center;
 }
 
+.form__input,
+.form__textarea {
+	outline: none;
+}
+
+.form__input:focus,
+.form__textarea:focus {
+	box-shadow: 1px 1px 10px #ddd;
+	border: none;
+}
+
 .form__label,
 .form__input {
-	display: inline-block;
+	display: block;
+	padding: 1.5rem 0.5rem;
+}
+
+.form__textarea {
+	height: 100px;
+	display: block;
+	font-style: oblique;
 	padding: 1rem 0.5rem;
+	border: 1px solid rgba(0, 0, 0, 0.3);
+}
+
+.form__option {
+	text-align: left;
+	text-transform: capitalize;
+}
+
+.form__option:nth-child(odd) {
+	background-color: #eee;
+}
+.form__textarea::placeholder {
+	color: rgba(0, 0, 0, 0.3);
 }
 
 .form__label {
@@ -258,6 +304,10 @@ select {
 	}
 	.card__large {
 		flex: 1;
+	}
+
+	.md-screen {
+		display: none;
 	}
 }
 

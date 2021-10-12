@@ -8,12 +8,9 @@ import userRouter from './router/userRouter.js';
 import productRouter from './router/productRouter.js';
 import orderRouter from './router/orderRouter.js';
 import keys from './config/keys.js';
-
-console.log(process.env.NODE_ENV);
 const app = express();
 const port = process.env.PORT || keys.PORT;
 const dbURL = keys.MONGO_URI;
-console.log(dbURL);
 
 // app setting middlewares
 app.use(express.json());

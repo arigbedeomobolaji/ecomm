@@ -31,3 +31,11 @@ export const verifyAuthToken = expressAsyncHandler(async (req, res, next) => {
 		}
 	});
 });
+
+export const isAdmin = expressAsyncHandler(async (req, res, next) => {
+	if (req.user && req.user.isAdmin) {
+		next();
+	} else {
+		res.status(401).send({ error: "You're not an Admin." });
+	}
+});
