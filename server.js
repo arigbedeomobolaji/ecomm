@@ -7,9 +7,11 @@ import mongoose from 'mongoose';
 import userRouter from './router/userRouter.js';
 import productRouter from './router/productRouter.js';
 import orderRouter from './router/orderRouter.js';
+import uploadRouter from './router/uploadRouter.js';
 import keys from './config/keys.js';
+
 const app = express();
-const port = process.env.PORT || keys.PORT;
+const port = keys.PORT;
 const dbURL = keys.MONGO_URI;
 
 // app setting middlewares
@@ -28,6 +30,8 @@ mongoose.connect(dbURL, {
 app.use('/api/products', productRouter);
 app.use('/api/users', userRouter);
 app.use('/api/orders', orderRouter);
+app.use('/api/upload', uploadRouter);
+
 app.get('/api/config/paystack', (req, res) => {
 	res.send(keys.PAYSTACK_CLIENTID || 'paystack_test');
 });

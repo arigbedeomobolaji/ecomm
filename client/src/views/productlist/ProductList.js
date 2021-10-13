@@ -10,12 +10,14 @@ const ProductList = () => {
 	const productList = useSelector((state) => state.productList);
 	const { products, error, loading } = productList;
 	const dispatch = useDispatch();
-
 	useEffect(() => {
-		if (loading) {
-			dispatch(productListAction());
-		}
-	}, [dispatch, loading]);
+		dispatch(productListAction());
+	}, [dispatch]);
+
+	const editProduct = (id) => {
+		console.log(id);
+	};
+
 	return (
 		<div>
 			<div className='row'>
@@ -57,7 +59,12 @@ const ProductList = () => {
 										{product.brand}
 									</td>
 									<td>
-										<button className='button button--small'>
+										<button
+											className='button button--small'
+											onclick={() =>
+												editProduct(product._id)
+											}
+										>
 											Edit
 										</button>
 										<button className='button button--small'>

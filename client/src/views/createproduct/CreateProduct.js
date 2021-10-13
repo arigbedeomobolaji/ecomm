@@ -1,5 +1,5 @@
 // jshint ignore: start
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { createProductAction } from '../../actions/productListAction';
 import InputText from '../../components/InputText';
@@ -8,7 +8,14 @@ import MessageBox from '../../components/messagebox/MessageBox';
 
 const CreateProduct = (props) => {
 	const ratingData = [0, 1, 2, 3, 4, 5];
-	const categoryData = ['pant', 'shorts', 'beauty', 'electronic', 'digital'];
+	const categoryData = [
+		'shoes',
+		'pant',
+		'shorts',
+		'beauty',
+		'electronic',
+		'digital',
+	];
 	const [name, setName] = useState('');
 	const [price, setPrice] = useState('');
 	const [brand, setBrand] = useState('');
@@ -19,8 +26,6 @@ const CreateProduct = (props) => {
 	const [description, setDescription] = useState('');
 	const [file, setFile] = useState(null);
 	const dispatch = useDispatch();
-
-	console.log(file);
 
 	// interacting with store
 	const createdProduct = useSelector((state) => state.createdProduct);
@@ -34,26 +39,31 @@ const CreateProduct = (props) => {
 		category &&
 		rating >= 0 &&
 		numReviews >= 0 &&
-		countInStock >= 0;
+		countInStock >= 0 &&
+		description;
 
 	const submitHandler = (e) => {
 		e.preventDefault();
 		const data = {
 			name,
-			price,
+			price: Number(price),
 			brand,
 			category,
-			rating,
-			numReviews,
-			countInStock,
+			rating: Number(rating),
+			numReviews: Number(numReviews),
+			countInStock: Number(countInStock),
 			description,
-			file,
 		};
-		dispatch(createProductAction(data));
+		dispatch(createProductAction(data, file));
+	};
+
+	console.log(product);
+
+	useEffect(() => {
 		if (product) {
 			props.history.push('/productlist');
 		}
-	};
+	}, [product, props.history]);
 
 	return (
 		<form className='form' onSubmit={submitHandler}>

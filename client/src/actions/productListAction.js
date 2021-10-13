@@ -42,18 +42,31 @@ export const productDetailsAction = (productId) => {
 };
 
 export const createProductAction =
-	(productData) => async (dispatch, getState) => {
+	(productData, file) => async (dispatch, getState) => {
 		dispatch({ type: CREATE_PRODUCT_REQUEST });
 		const {
 			userSignin: { userInfo },
 		} = getState();
 		try {
+			const { data: fileData } = await axios.get('/api/upload', {
+				headers: {
+					authorization: `Bearer ${userInfo.token}`,
+				},
+			});
+			await axios.put(fileData.url, file, {
+				headers: {
+					'Content-Type': file.type,
+				},
+			});
 			const { data } = await axios.post(
 				'/api/products/create',
-				productData,
+				{
+					...productData,
+					image: fileData.key,
+				},
 				{
 					headers: {
-						authorization: `Bearer ${userInfo._id}`,
+						authorization: `Bearer ${userInfo.token}`,
 					},
 				}
 			);

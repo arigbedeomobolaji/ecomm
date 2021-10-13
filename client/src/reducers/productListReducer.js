@@ -11,7 +11,7 @@ import {
 	CREATE_PRODUCT_FAIL,
 } from '../constants/productConstant';
 
-const productListDefault = { products: [], loading: true, error: false };
+const productListDefault = { products: [], loading: false, error: false };
 export const productListReducer = (state = productListDefault, action) => {
 	switch (action.type) {
 		case PRODUCT_LIST_REQUEST:
@@ -39,11 +39,11 @@ export const productDetailReducer = (state = productDetailDefault, action) => {
 	}
 };
 
-const createProductDefault = { product: null, loading: true, error: '' };
+const createProductDefault = { product: null, loading: false, error: '' };
 export const createProductReducer = (state = createProductDefault, action) => {
 	switch (action.type) {
 		case CREATE_PRODUCT_REQUEST:
-			return { createProductDefault };
+			return { loading: true };
 		case CREATE_PRODUCT_SUCCESS:
 			return {
 				loading: false,
