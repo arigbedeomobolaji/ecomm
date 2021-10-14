@@ -2,6 +2,7 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 import { productListAction } from '../../actions/productListAction';
 import LoadingBox from '../../components/loadingbox/LoadingBox';
 import MessageBox from '../../components/messagebox/MessageBox';
@@ -9,6 +10,8 @@ import MessageBox from '../../components/messagebox/MessageBox';
 const ProductList = (props) => {
 	const productList = useSelector((state) => state.productList);
 	const { products, error, loading } = productList;
+	const userSignin = useSelector((state) => state.userSignin);
+	const { userInfo } = userSignin;
 	const dispatch = useDispatch();
 	useEffect(() => {
 		dispatch(productListAction());
@@ -18,10 +21,22 @@ const ProductList = (props) => {
 		props.history.push(`/products/${id}/edit`);
 	};
 
+	const onHandleDelete = async (id) => {
+		const confirmId = prompt(`You want to continue then enter >>> ${id} `);
+		if (confirmId.trim() === id) {
+			await axios.delete(`/api/products/${id}`, {
+				headers: {
+					authorization: `Bearer ${userInfo.token}`,
+				},
+			});
+			dispatch(productListAction());
+		}
+	};
+
 	return (
 		<div>
 			<div className='row'>
-				<h1> Order History </h1>
+				<h1> Product List </h1>
 				<Link to='/product/create' className='button button--primary'>
 					Create Product
 				</Link>
@@ -67,7 +82,12 @@ const ProductList = (props) => {
 										>
 											Edit
 										</button>
-										<button className='button button--small'>
+										<button
+											className='button button--small'
+											onClick={() =>
+												onHandleDelete(product._id)
+											}
+										>
 											Delete
 										</button>
 									</td>

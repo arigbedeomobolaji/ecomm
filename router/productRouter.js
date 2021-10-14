@@ -34,6 +34,20 @@ productRouter.post(
 	})
 );
 
+productRouter.delete(
+	'/:id',
+	verifyAuthToken,
+	isAdmin,
+	asyncHandler(async (req, res) => {
+		const id = req.params.id;
+		const deletedProduct = await Product.findByIdAndDelete(id);
+		if (deletedProduct) {
+			return res.status(200).send(deletedProduct);
+		}
+		res.send({ message: 'Unable to delete this product' });
+	})
+);
+
 productRouter.put(
 	'/:id',
 	verifyAuthToken,

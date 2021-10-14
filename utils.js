@@ -12,7 +12,7 @@ export const generateAuthToken = (user) => {
 		keys.JWT_SECRET,
 		{
 			// expiresIn: '1d',
-			expiresIn: '2mins',
+			expiresIn: '60000s',
 		}
 	);
 	return token;
