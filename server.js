@@ -11,7 +11,7 @@ import uploadRouter from './router/uploadRouter.js';
 import keys from './config/keys.js';
 
 const app = express();
-const port = keys.PORT;
+const port = process.env.PORT || keys.PORT;
 const dbURL = keys.MONGO_URI;
 
 // app setting middlewares
