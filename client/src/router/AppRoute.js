@@ -16,6 +16,7 @@ import OrderHistory from '../views/OrderHistory/OrderHistory';
 import ProfileScreen from '../views/ProfileScreen';
 import ProductList from '../views/productlist/ProductList';
 import CreateProduct from '../views/createproduct/CreateProduct';
+import EditProduct from '../views/editProduct/EditProduct';
 import PrivateRoute from './PrivateRoute';
 import AdminRoute from './AdminRoute';
 
@@ -25,6 +26,11 @@ const AppRoute = () => {
 			<Header />
 			<Switch>
 				<Route path='/' component={Home} exact></Route>
+				<AdminRoute
+					path='/products/:id/edit'
+					component={EditProduct}
+					exact
+				/>
 				<Route path='/products/:id' component={Products}></Route>
 				<Route path='/cart/:id?' component={Cart} />
 				<Route path='/signin' component={Signin} />
@@ -39,7 +45,7 @@ const AppRoute = () => {
 					component={ProfileScreen}
 				></PrivateRoute>
 				<AdminRoute path='/productlist' component={ProductList} />
-				<AdminRoute path='/create/product' component={CreateProduct} />
+				<AdminRoute path='/product/create' component={CreateProduct} />
 			</Switch>
 			<Footer />
 		</BrowserRouter>

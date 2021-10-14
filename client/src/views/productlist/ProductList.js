@@ -6,7 +6,7 @@ import { productListAction } from '../../actions/productListAction';
 import LoadingBox from '../../components/loadingbox/LoadingBox';
 import MessageBox from '../../components/messagebox/MessageBox';
 
-const ProductList = () => {
+const ProductList = (props) => {
 	const productList = useSelector((state) => state.productList);
 	const { products, error, loading } = productList;
 	const dispatch = useDispatch();
@@ -15,14 +15,14 @@ const ProductList = () => {
 	}, [dispatch]);
 
 	const editProduct = (id) => {
-		console.log(id);
+		props.history.push(`/products/${id}/edit`);
 	};
 
 	return (
 		<div>
 			<div className='row'>
 				<h1> Order History </h1>
-				<Link to='/create/product' className='button button--primary'>
+				<Link to='/product/create' className='button button--primary'>
 					Create Product
 				</Link>
 			</div>
@@ -61,7 +61,7 @@ const ProductList = () => {
 									<td>
 										<button
 											className='button button--small'
-											onclick={() =>
+											onClick={() =>
 												editProduct(product._id)
 											}
 										>

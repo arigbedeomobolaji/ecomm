@@ -1,12 +1,29 @@
 // jshint ignore: start
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { createProductAction } from '../../actions/productListAction';
+import {
+	productDetailsAction,
+	editProductAction,
+} from '../../actions/productListAction';
+import { EDIT_PRODUCT_RESET } from '../../constants/productConstant';
 import InputText from '../../components/InputText';
 import { Select, TextArea } from '../../components/Form';
 import MessageBox from '../../components/messagebox/MessageBox';
+import { updateData } from '../../util';
 
-const CreateProduct = (props) => {
+const EditProduct = (props) => {
+	const productId = props.match.params.id;
+	const productDetails = useSelector((state) => state.productDetails);
+	const { product, error } = productDetails;
+
+	const editedProduct = useSelector((state) => state.editedProduct);
+	let {
+		loading,
+		product: updatedProduct,
+		error: editedProductError,
+	} = editedProduct;
+	console.log({ loading, updatedProduct, editedProductError });
+
 	const ratingData = [0, 1, 2, 3, 4, 5];
 	const categoryData = [
 		'shoes',
@@ -16,32 +33,24 @@ const CreateProduct = (props) => {
 		'electronic',
 		'digital',
 	];
-	const [name, setName] = useState('');
-	const [price, setPrice] = useState('');
-	const [brand, setBrand] = useState('');
-	const [category, setCategory] = useState('pant');
-	const [rating, setRating] = useState(0);
-	const [numReviews, setNumReviews] = useState(0);
-	const [countInStock, setCountInStock] = useState(0);
-	const [description, setDescription] = useState('');
+	const [name, setName] = useState(product ? product.name : '');
+	const [price, setPrice] = useState(product ? product.price : 0);
+	const [image, setImage] = useState(product ? product.image : '');
+	const [brand, setBrand] = useState(product ? product.brand : '');
+	const [category, setCategory] = useState(product ? product.category : '');
+	const [rating, setRating] = useState(product ? product.rating : 0);
+	const [numReviews, setNumReviews] = useState(
+		product ? product.numReviews : 0
+	);
+	const [countInStock, setCountInStock] = useState(
+		product ? product.countInStock : 0
+	);
+	const [description, setDescription] = useState(
+		product ? product.description : ''
+	);
 	const [file, setFile] = useState(null);
+	const [fileTwo, setFileTwo] = useState(null);
 	const dispatch = useDispatch();
-
-	// interacting with store
-	const createdProduct = useSelector((state) => state.createdProduct);
-	const { loading, error, product } = createdProduct;
-
-	const canContinue =
-		name &&
-		price &&
-		file &&
-		brand &&
-		category &&
-		rating >= 0 &&
-		numReviews >= 0 &&
-		countInStock >= 0 &&
-		description;
-
 	const submitHandler = (e) => {
 		e.preventDefault();
 		const data = {
@@ -54,24 +63,31 @@ const CreateProduct = (props) => {
 			countInStock: Number(countInStock),
 			description,
 		};
-		dispatch(createProductAction(data, file));
+		const update = updateData(product, data);
+		dispatch(editProductAction(productId, update, file, fileTwo));
 	};
 
 	useEffect(() => {
-		if (product) {
+		dispatch(productDetailsAction(productId));
+	}, [dispatch, productId]);
+
+	useEffect(() => {
+		if (updatedProduct) {
 			props.history.push('/productlist');
 		}
-	}, [product, props.history]);
+		dispatch({ type: EDIT_PRODUCT_RESET });
+	}, [updatedProduct, props.history]);
 
 	return (
 		<form className='form' onSubmit={submitHandler}>
 			<div className='form__group'>
-				<h1>Create Product</h1>
+				<h1>Edit Product</h1>
 			</div>
 			{!!error && <MessageBox variant='danger'>{error}</MessageBox>}
 			<InputText
 				isRequired
 				name={'name'}
+				value={name}
 				label={'Name'}
 				placeholder={'Enter Product Name'}
 				onChange={(e) => {
@@ -79,7 +95,8 @@ const CreateProduct = (props) => {
 				}}
 			/>
 			<InputText
-				isRequired={true}
+				isRequired
+				value={price}
 				type='number'
 				name='price'
 				label='Price'
@@ -87,15 +104,31 @@ const CreateProduct = (props) => {
 				onChange={(e) => setPrice(e.target.value)}
 			/>
 			<InputText
-				isRequired={true}
+				isRequired
+				value={image}
+				type='text'
+				name='image'
+				label='Image Url'
+				placeholder='Enter Image URL'
+				onChange={(e) => setImage(e.target.value)}
+			/>
+			<InputText
 				type='file'
 				name='image'
-				label='Product Image'
+				label='Add Product Image'
 				accept='image/*'
 				onChange={(e) => setFile(e.target.files[0])}
 			/>
 			<InputText
+				type='file'
+				name='additionalImage'
+				label='Additional Image'
+				accept='image/*'
+				onChange={(e) => setFileTwo(e.target.files[0])}
+			/>
+			<InputText
 				name='brand'
+				value={brand}
 				label='Brand'
 				placeholder='Enter Product Brand'
 				onChange={(e) => setBrand(e.target.value)}
@@ -117,6 +150,7 @@ const CreateProduct = (props) => {
 				></Select>
 			</div>
 			<InputText
+				value={numReviews}
 				type='number'
 				name='numReviews'
 				label='Number of Reviews'
@@ -124,6 +158,7 @@ const CreateProduct = (props) => {
 				onChange={(e) => setNumReviews(e.target.value)}
 			/>
 			<InputText
+				value={countInStock}
 				type='number'
 				name='countInStock'
 				label='Number of Product in Stock'
@@ -131,6 +166,7 @@ const CreateProduct = (props) => {
 				onChange={(e) => setCountInStock(e.target.value)}
 			/>
 			<TextArea
+				value={description}
 				name='description'
 				label='Description'
 				placeholder='Enter Product Description'
@@ -141,13 +177,13 @@ const CreateProduct = (props) => {
 				<button
 					type='submit'
 					className='button button--primary'
-					disabled={!canContinue || loading}
+					disabled={loading}
 				>
-					{loading ? 'Creating' : 'Create Product'}
+					{loading ? 'Updating' : 'Edit Product'}
 				</button>
 			</div>
 		</form>
 	);
 };
 
-export default CreateProduct;
+export default EditProduct;

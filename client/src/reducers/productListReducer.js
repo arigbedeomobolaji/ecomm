@@ -9,6 +9,10 @@ import {
 	CREATE_PRODUCT_REQUEST,
 	CREATE_PRODUCT_SUCCESS,
 	CREATE_PRODUCT_FAIL,
+	EDIT_PRODUCT_REQUEST,
+	EDIT_PRODUCT_SUCCESS,
+	EDIT_PRODUCT_FAIL,
+	EDIT_PRODUCT_RESET,
 } from '../constants/productConstant';
 
 const productListDefault = { products: [], loading: false, error: false };
@@ -25,7 +29,7 @@ export const productListReducer = (state = productListDefault, action) => {
 	}
 };
 
-const productDetailDefault = { product: {}, error: false, loading: true };
+const productDetailDefault = { product: null, error: false, loading: true };
 export const productDetailReducer = (state = productDetailDefault, action) => {
 	switch (action.type) {
 		case PRODUCT_DETAIL_REQUEST:
@@ -54,6 +58,28 @@ export const createProductReducer = (state = createProductDefault, action) => {
 				loading: false,
 				error: action.payload,
 			};
+		default:
+			return state;
+	}
+};
+
+const editProductDefault = { product: null, loading: false, error: '' };
+export const editProductReducer = (state = editProductDefault, action) => {
+	switch (action.type) {
+		case EDIT_PRODUCT_REQUEST:
+			return { loading: true };
+		case EDIT_PRODUCT_SUCCESS:
+			return {
+				loading: false,
+				product: action.payload,
+			};
+		case EDIT_PRODUCT_FAIL:
+			return {
+				loading: false,
+				error: action.payload,
+			};
+		case EDIT_PRODUCT_RESET:
+			return editProductDefault;
 		default:
 			return state;
 	}

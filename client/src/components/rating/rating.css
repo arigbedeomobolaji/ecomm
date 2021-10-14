@@ -1,9 +1,10 @@
 .rating {
- color: #f0c040;
+	color: #f0c040;
 }
 
-.numReview{
- color: #404040;
- font-weight: bold;
- padding-left: 0.5rem;
+.numReview {
+	display: block;
+	color: #404040;
+	font-weight: bold;
+	padding-left: 0.5rem;
 }

@@ -34,6 +34,24 @@ productRouter.post(
 	})
 );
 
+productRouter.put(
+	'/:id',
+	verifyAuthToken,
+	isAdmin,
+	asyncHandler(async (req, res) => {
+		const id = req.params.id;
+		const update = req.body;
+		const updatedProduct = await Product.findByIdAndUpdate(id, update, {
+			new: true,
+		});
+		if (updatedProduct) {
+			return res.status(201).send(updatedProduct);
+		}
+
+		res.status(422).send({ message: 'Unable to update product.' });
+	})
+);
+
 productRouter.get(
 	'/:id',
 	asyncHandler(async (req, res) => {

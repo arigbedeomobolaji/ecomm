@@ -11,7 +11,8 @@ export const generateAuthToken = (user) => {
 		},
 		keys.JWT_SECRET,
 		{
-			expiresIn: '1d',
+			// expiresIn: '1d',
+			expiresIn: '2mins',
 		}
 	);
 	return token;

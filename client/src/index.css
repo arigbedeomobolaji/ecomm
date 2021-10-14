@@ -69,7 +69,7 @@ code {
 .cards {
 	display: flex;
 	flex-wrap: wrap;
-	justify-content: space-around;
+	justify-content: space-evenly;
 	align-items: center;
 	margin: 2rem 0;
 }
@@ -86,7 +86,7 @@ code {
 	border: 1px solid #f0c040;
 	border-radius: 0.5rem;
 	margin: 0.5rem;
-	width: 29rem;
+	width: 200px;
 }
 
 .card__large {
@@ -101,6 +101,8 @@ code {
 	border-radius: 1rem;
 	max-width: 29rem;
 	width: 100%;
+	height: 15rem;
+	display: block;
 }
 
 .card__body {
