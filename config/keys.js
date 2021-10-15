@@ -1,7 +1,12 @@
 import prod from './prod.js';
-import dev from './dev.js';
 
-let keys = dev;
+let keys;
+
+if (process.env.NODE_ENV !== 'production') {
+	import dev from './dev.js';
+	key = dev;
+}
+
 if (process.env.NODE_ENV === 'production') {
 	keys = prod;
 }
